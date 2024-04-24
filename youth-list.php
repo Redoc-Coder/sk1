@@ -580,11 +580,11 @@ if ($result->num_rows > 0) {
         // Modify the Edit and Archive buttons with Bootstrap styling
         echo "<td>";
         // Button to trigger the modal for editing
-        echo "<button onclick=\"editRecord('" . $row["id"] . "')\" class=\"btn btn-primary mr-2 mb-2\">Edit</button>";
+        echo "<button onclick=\"editRecord('" . $row["id"] . "')\" class=\"btn btn-primary\">Edit</button>";
         // Button to trigger the modal for archiving
         // echo "<button onclick=\"archiveRecord('" . $row["id"] . "')\" class=\"btn btn-danger mr-2\">Archive</button>";
 
-        echo "<td><button onclick=\"openArchiveModal('" . $row["id"] . "')\" class=\"btn btn-danger\">Archive</button></td>";
+        echo "<td><button onclick=\"openArchiveModal('" . $row["id"] . "')\" class=\"btn btn-danger\">Archive?</button></td>";
 
         
         echo "</td>";
@@ -595,7 +595,6 @@ if ($result->num_rows > 0) {
     echo "<tr><td colspan='6'>No records found</td></tr>";
 }
 ?>
-
 
 
 
@@ -614,7 +613,7 @@ if ($result->num_rows > 0) {
                 <textarea id="archiveReason" class="form-control" rows="4"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="archiveRecord()">Archive</button>
+                <button type="button" class="btn btn-danger" onclick="archiveRecord()">Archive</button>
                 <button type="button" class="btn btn-secondary" onclick="closeArchiveModal()">Close</button>
             </div>
         </div>
@@ -635,17 +634,17 @@ if ($result->num_rows > 0) {
     }
 
     // Function to archive the record
-    function archiveRecord() {
-        var recordId = document.getElementById('archiveReason').getAttribute('data-record-id');
-        var reason = document.getElementById('archiveReason').value;
-        // Call PHP script to archive the record with the provided reason
-        // You can use AJAX or submit a form to pass the data to the server
-        // Example:
-        // $.post('archive_record.php', { id: recordId, reason: reason }, function(response) {
-        //     // Handle response from server
-        // });
-        // Close the modal after archiving
-        closeArchiveModal();
+    function archiveRecord(id) {
+        // AJAX request to archive record
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // Refresh the page after archiving
+                window.location.reload();
+            }
+        };
+        xhttp.open("GET", "archive-youth.php?id=" + id, true);
+        xhttp.send();
     }
 </script>
 
@@ -785,18 +784,18 @@ if ($result->num_rows > 0) {
         xhttp.send();
     }
 
-    function archiveRecord(id) {
-        // AJAX request to archive record
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                // Refresh the page after archiving
-                window.location.reload();
-            }
-        };
-        xhttp.open("GET", "archive-youth.php?id=" + id, true);
-        xhttp.send();
-    }
+    // function archiveRecord(id) {
+    //     // AJAX request to archive record
+    //     var xhttp = new XMLHttpRequest();
+    //     xhttp.onreadystatechange = function () {
+    //         if (this.readyState == 4 && this.status == 200) {
+    //             // Refresh the page after archiving
+    //             window.location.reload();
+    //         }
+    //     };
+    //     xhttp.open("GET", "archive-youth.php?id=" + id, true);
+    //     xhttp.send();
+    // }
     
 </script>
 <script>
