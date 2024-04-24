@@ -582,7 +582,9 @@ if ($result->num_rows > 0) {
         // Button to trigger the modal for editing
         echo "<button onclick=\"editRecord('" . $row["id"] . "')\" class=\"btn btn-primary mr-2 mb-2\">Edit</button>";
         // Button to trigger the modal for archiving
-        echo "<button onclick=\"archiveRecord('" . $row["id"] . "')\" class=\"btn btn-danger mr-2\">Archive</button>";
+        // echo "<button onclick=\"archiveRecord('" . $row["id"] . "')\" class=\"btn btn-danger mr-2\">Archive</button>";
+
+        echo "<td><button onclick=\"openArchiveModal('" . $row["id"] . "')\" class=\"btn btn-danger\">Archive</button></td>";
 
         
         echo "</td>";
@@ -598,7 +600,54 @@ if ($result->num_rows > 0) {
 
 
 
+<!-- Modal dialog for entering archive reason -->
+<div id="archiveModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Archive Reason</h5>
+                <button type="button" class="close" onclick="closeArchiveModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea id="archiveReason" class="form-control" rows="4"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="archiveRecord()">Archive</button>
+                <button type="button" class="btn btn-secondary" onclick="closeArchiveModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    // Function to open the modal and pass the record ID
+    function openArchiveModal(recordId) {
+        var modal = document.getElementById('archiveModal');
+        modal.style.display = 'block';
+        document.getElementById('archiveReason').setAttribute('data-record-id', recordId);
+    }
+
+    // Function to close the modal
+    function closeArchiveModal() {
+        document.getElementById('archiveModal').style.display = 'none';
+    }
+
+    // Function to archive the record
+    function archiveRecord() {
+        var recordId = document.getElementById('archiveReason').getAttribute('data-record-id');
+        var reason = document.getElementById('archiveReason').value;
+        // Call PHP script to archive the record with the provided reason
+        // You can use AJAX or submit a form to pass the data to the server
+        // Example:
+        // $.post('archive_record.php', { id: recordId, reason: reason }, function(response) {
+        //     // Handle response from server
+        // });
+        // Close the modal after archiving
+        closeArchiveModal();
+    }
+</script>
 
 
 
