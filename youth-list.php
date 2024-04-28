@@ -584,6 +584,7 @@ if ($result->num_rows > 0) {
         // Button to trigger the modal for archiving
         // echo "<button onclick=\"archiveRecord('" . $row["id"] . "')\" class=\"btn btn-danger mr-2\">Archive</button>";
 
+        // Popup modal
         echo "<td><button onclick=\"openArchiveModal('" . $row["id"] . "')\" class=\"btn btn-danger\">Archive?</button></td>";
 
         
