@@ -336,31 +336,34 @@ if (isset($_SESSION['email'])) {
 
 
               <script>
-                function restoreRecord(id) {
-            // AJAX request to fetch record details
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
+              function restoreRecord(id) {
+                // AJAX request to fetch record details
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("editForm").innerHTML = this.responseText;
                     document.getElementById("editForm").style.display = "block";
-                }
-            };
-            xhttp.open("GET", "restore-youth.php?id=" + id, true);
-            xhttp.send();
-        }
-                function restoreRecord(id) {
-                  // AJAX request to archive record
-                  var xhttp = new XMLHttpRequest();
-                  xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                      // Refresh the page after archiving
-                      window.location.reload();
-                    }
-                  };
-                  xhttp.open("GET", "restore-youth.php?id=" + id, true);
-                  xhttp.send();
-                }
-              </script>
+                  }
+                };
+                xhttp.open("GET", "restore-youth.php?id=" + id, true);
+                xhttp.send();
+              }
+
+              // Function to restore a record
+              function restoreRecord(id) {
+                // AJAX request to archive record
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                    // Refresh the page after archiving
+                    window.location.reload();
+                  }
+                };
+                xhttp.open("GET", "restore-youth.php?id=" + id, true);
+                xhttp.send();
+              }
+            </script>
+
 
 
             </div>

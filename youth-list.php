@@ -621,31 +621,34 @@ if ($result->num_rows > 0) {
 </div>
 
 <script>
-    // Function to open the modal and pass the record ID
-    function openArchiveModal(recordId) {
-        var modal = document.getElementById('archiveModal');
-        modal.style.display = 'block';
-        document.getElementById('archiveReason').setAttribute('data-record-id', recordId);
-    }
+        // Function to open the modal and pass the record ID
+        function openArchiveModal(recordId) {
+            var modal = document.getElementById('archiveModal');
+            modal.style.display = 'block';
+            // Set the record ID as a data attribute of the textarea
+            document.getElementById('archiveReason').setAttribute('data-record-id', recordId);
+        }
 
-    // Function to close the modal
-    function closeArchiveModal() {
-        document.getElementById('archiveModal').style.display = 'none';
-    }
+        // Function to close the modal
+        function closeArchiveModal() {
+            document.getElementById('archiveModal').style.display = 'none';
+        }
 
-    // Function to archive the record
-    function archiveRecord(id) {
-        // AJAX request to archive record
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                // Refresh the page after archiving
-                window.location.reload();
-            }
-        };
-        xhttp.open("GET", "archive-youth.php?id=" + id, true);
-        xhttp.send();
-    }
+        // Function to archive the record
+        function archiveRecord(id) {
+            var reason = document.getElementById('archiveReason').value; // Retrieve archived reason
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    window.location.reload();
+                }
+            };
+            xhttp.open("GET", "archive-youth.php?id=" + id + "&reason=" + encodeURIComponent(reason), true); // Pass reason as parameter
+            xhttp.send();
+            
+        }
+
+
 </script>
 
 
