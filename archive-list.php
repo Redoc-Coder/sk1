@@ -315,7 +315,8 @@ if (isset($_SESSION['email'])) {
                       echo "<td hidden>" . $row["session_id"] . "</td>";
 
 
-                      echo "<td><button onclick=\"restoreRecord('" . $row["id"] . "')\">Restore</button> </td>";
+                      echo "<td><button onclick=\"restoreRecord('" . $row["id"] . "')\" class=\"btn btn-success\">Restore</button></td>";
+
 
                       // echo "<td><button onclick=\"editRecord('" . $row["id"] . "')\">Edit</button></td>";
                       // echo "<td><button onclick=\"archiveRecord('" . $row["id"] . "')\">Archive</button></td>";
